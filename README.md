@@ -1,5 +1,10 @@
 # product-spec
 
+[![CI Passing](https://github.com/ehud-am/product-spec/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ehud-am/product-spec/actions/workflows/ci.yml)
+[![npm release](https://img.shields.io/npm/v/product-spec)](https://www.npmjs.com/package/product-spec)
+[![node release](https://img.shields.io/node/v/product-spec)](https://www.npmjs.com/package/product-spec)
+[![License](https://img.shields.io/npm/l/product-spec)](./LICENSE)
+
 The product management counterpart to [spec-kit](https://github.com/github/spec-kit). product-spec brings product management disciplines to spec-driven development, following Amazon's Working Backwards (PR/FAQ) methodology.
 
 While spec-kit handles engineering specifications, product-spec handles the product narrative: the domain context, press releases, FAQs, and requirements that define what you're building and why before spec-kit defines how.

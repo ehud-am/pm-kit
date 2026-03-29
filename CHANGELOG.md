@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Prepared the `v0.3.0` release to validate a clean GitHub Actions release cycle end to end
 - Renamed the published package, CLI, assistant command prefix, and managed manifest path to `product-spec`
 - Updated current-facing documentation, CLI help text, and packaged assistant assets to use `product-spec`
 - Updated current-facing repository guidance to use the `product-spec` name consistently
