@@ -32,7 +32,7 @@ export interface AddOptions {
   rootDir: string;
   packageRoot: string;
   requestedTarget: RequestedTarget;
-  prdKitVersion: string;
+  productSpecVersion: string;
 }
 
 function buildTargetState(target: AssistantTarget, assets: AssetRecord[]): ManagedTargetState {
@@ -46,8 +46,8 @@ function buildTargetState(target: AssistantTarget, assets: AssetRecord[]): Manag
 
 export async function runAdd(options: AddOptions): Promise<OperationSummary> {
   const selectedTargets = resolveTargets(options.requestedTarget);
-  let manifest = (await loadManifest(options.rootDir)) ?? createEmptyManifest(options.rootDir, options.prdKitVersion);
-  manifest.prdKitVersion = options.prdKitVersion;
+  let manifest = (await loadManifest(options.rootDir)) ?? createEmptyManifest(options.rootDir, options.productSpecVersion);
+  manifest.productSpecVersion = options.productSpecVersion;
 
   const files: OperationFileResult[] = [];
   const changedTargets: AssistantTarget[] = [];
@@ -97,6 +97,6 @@ export async function runAdd(options: AddOptions): Promise<OperationSummary> {
     changedTargets,
     skippedTargets,
     files,
-    notes: ["Run `prd-kit check` to validate the installed integrations."]
+    notes: ["Run `product-spec check` to validate the installed integrations."]
   };
 }

@@ -28,21 +28,21 @@ afterEach(async () => {
   await Promise.all(cleanupPaths.splice(0).map((target) => rm(target, { recursive: true, force: true })));
 });
 
-describe("prd-kit CLI", () => {
+describe("product-spec CLI", () => {
   it("adds Claude and Codex assets and writes a manifest", async () => {
-    const projectDir = await makeProjectDir("prd-kit-add-");
+    const projectDir = await makeProjectDir("product-spec-add-");
 
     const result = runCli(projectDir, "add", "both");
 
     expect(result.status).toBe(0);
-    const manifest = JSON.parse(await readFile(path.join(projectDir, ".prd-kit/manifest.json"), "utf8"));
+    const manifest = JSON.parse(await readFile(path.join(projectDir, ".product-spec/manifest.json"), "utf8"));
     expect(manifest.targets).toHaveLength(2);
-    expect(await readFile(path.join(projectDir, ".claude/commands/prd-kit-domain.md"), "utf8")).toContain("/prd-kit-domain");
-    expect(await readFile(path.join(projectDir, ".Codex/commands/prd-kit-domain.md"), "utf8")).toContain(".product/domain.md");
+    expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-domain.md"), "utf8")).toContain("/product-spec-domain");
+    expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).toContain(".product/domain.md");
   });
 
-  it("removes only prd-kit-managed files and keeps unrelated files", async () => {
-    const projectDir = await makeProjectDir("prd-kit-remove-");
+  it("removes only product-spec-managed files and keeps unrelated files", async () => {
+    const projectDir = await makeProjectDir("product-spec-remove-");
 
     expect(runCli(projectDir, "add", "both").status).toBe(0);
     await writeFile(path.join(projectDir, ".claude/commands/manual.md"), "manual", "utf8");
@@ -52,14 +52,14 @@ describe("prd-kit CLI", () => {
     expect(result.status).toBe(0);
     expect(result.stdout).toContain("Changed targets: claude");
     await expect(readFile(path.join(projectDir, ".claude/commands/manual.md"), "utf8")).resolves.toBe("manual");
-    await expect(readFile(path.join(projectDir, ".Codex/commands/prd-kit-domain.md"), "utf8")).resolves.toContain(".product/domain.md");
+    await expect(readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).resolves.toContain(".product/domain.md");
   });
 
   it("reports unhealthy state when a managed file drifts", async () => {
-    const projectDir = await makeProjectDir("prd-kit-check-");
+    const projectDir = await makeProjectDir("product-spec-check-");
 
     expect(runCli(projectDir, "add", "claude").status).toBe(0);
-    await rm(path.join(projectDir, ".claude/commands/prd-kit-domain.md"));
+    await rm(path.join(projectDir, ".claude/commands/product-spec-domain.md"));
 
     const check = runCli(projectDir, "check", "claude");
     const doctor = runCli(projectDir, "doctor", "claude");
@@ -69,13 +69,13 @@ describe("prd-kit CLI", () => {
     expect(doctor.stdout).toContain("Recommended action");
   });
 
-  it("shows prd-kit in the help output", async () => {
-    const projectDir = await makeProjectDir("prd-kit-help-");
+  it("shows product-spec in the help output", async () => {
+    const projectDir = await makeProjectDir("product-spec-help-");
 
     const result = runCli(projectDir, "--help");
 
     expect(result.status).toBe(0);
-    expect(result.stdout).toContain("Usage: prd-kit");
+    expect(result.stdout).toContain("Usage: product-spec");
     expect(result.stdout).not.toContain("Usage: pmkey");
   });
 });

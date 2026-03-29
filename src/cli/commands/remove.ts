@@ -7,7 +7,7 @@ export function registerRemoveCommand(program: Command, context: { rootDir: stri
   program
     .command("remove")
     .argument("<target>", "claude, codex, or both")
-    .description("Remove prd-kit-managed integration files from the current project")
+    .description("Remove product-spec-managed integration files from the current project")
     .action(async (target: string) => {
       const summary = await runRemove({
         rootDir: context.rootDir,

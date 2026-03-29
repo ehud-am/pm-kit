@@ -15,21 +15,21 @@ const files = [
   "src/core/orchestration/add.ts",
   "src/core/orchestration/check.ts",
   "tests/integration/cli.spec.ts",
-  "assets/claude/commands/prd-kit-align.md",
-  "assets/claude/commands/prd-kit-domain.md",
-  "assets/claude/commands/prd-kit-faq.md",
-  "assets/claude/commands/prd-kit-press.md",
-  "assets/codex/commands/prd-kit-align.md",
-  "assets/codex/commands/prd-kit-domain.md",
-  "assets/codex/commands/prd-kit-faq.md",
-  "assets/codex/commands/prd-kit-press.md"
+  "assets/claude/commands/product-spec-align.md",
+  "assets/claude/commands/product-spec-domain.md",
+  "assets/claude/commands/product-spec-faq.md",
+  "assets/claude/commands/product-spec-press.md",
+  "assets/codex/commands/product-spec-align.md",
+  "assets/codex/commands/product-spec-domain.md",
+  "assets/codex/commands/product-spec-faq.md",
+  "assets/codex/commands/product-spec-press.md"
 ];
 
 const allowedSubstrings = [
-  ".prd-kit/manifest.json",
-  "prdKitVersion",
-  "github:ehud-am/prd-kit",
-  "Initial prd-kit command set",
+  ".product-spec/manifest.json",
+  "productSpecVersion",
+  "github:ehud-am/product-spec",
+  "Initial product-spec command set",
   'expect(result.stdout).not.toContain("Usage: pmkey");'
 ];
 

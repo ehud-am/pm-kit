@@ -1,4 +1,4 @@
-# prd-kit Development Guidelines
+# product-spec Development Guidelines
 
 Auto-generated from all feature plans. Last updated: 2026-03-28
 
@@ -14,16 +14,16 @@ Auto-generated from all feature plans. Last updated: 2026-03-28
 assets/                  # Packaged command and template assets
 src/                     # TypeScript CLI source
 tests/                   # Vitest unit and integration coverage
-.specify/                # spec-kit directory (not owned by prd-kit)
+.specify/                # spec-kit directory (not owned by product-spec)
 specs/                   # Feature specs (spec-kit output)
 ```
 
 ## Commands
 
-- `prd-kit add <target>` — install prd-kit assets into a project
-- `prd-kit remove <target>` — remove only prd-kit managed assets for a target
-- `prd-kit check [target]` — validate integration health
-- `prd-kit doctor [target]` — show richer diagnostics and recovery guidance
+- `product-spec add <target>` — install product-spec assets into a project
+- `product-spec remove <target>` — remove only product-spec managed assets for a target
+- `product-spec check [target]` — validate integration health
+- `product-spec doctor [target]` — show richer diagnostics and recovery guidance
 
 ## Code Style
 

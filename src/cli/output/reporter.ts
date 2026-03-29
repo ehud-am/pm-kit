@@ -4,7 +4,7 @@ import type { OperationSummary } from "../../types/index.js";
 
 export function formatOperationSummary(action: "add" | "remove", summary: OperationSummary): string {
   const lines = [
-    `prd-kit ${action} ${summary.requestedTarget}`,
+    `product-spec ${action} ${summary.requestedTarget}`,
     `Changed targets: ${summary.changedTargets.length > 0 ? summary.changedTargets.join(", ") : "none"}`,
     `Skipped targets: ${summary.skippedTargets.length > 0 ? summary.skippedTargets.join(", ") : "none"}`
   ];
