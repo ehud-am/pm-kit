@@ -46,7 +46,7 @@ jobs:
         run: npm ci
 
       - name: Align package version to release
-        run: npm version "${{ steps.version.outputs.version }}" --no-git-tag-version
+        run: npm version "${{ steps.version.outputs.version }}" --no-git-tag-version --allow-same-version
 
       - name: Typecheck
         run: npm run typecheck
