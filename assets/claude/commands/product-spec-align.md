@@ -1,5 +1,5 @@
 ---
-description: Reconcile the .product folder with changes made in .specify specs — update press, faq, and requirements.
+description: Reconcile the .product folder with changes made in .specify specs — update product-facing docs and maintain current truth.
 handoffs:
   - label: Update Press Release
     agent: product-spec-press
@@ -10,6 +10,9 @@ handoffs:
   - label: Update Domain
     agent: product-spec-domain
     prompt: Update domain knowledge based on what we learned during alignment
+  - label: Refine Roadmap
+    agent: product-spec-roadmap
+    prompt: Update the roadmap based on what alignment reveals about current truth and future bets
 ---
 
 ## User Input
@@ -26,12 +29,13 @@ You are reconciling the product documents in `.product/` with the engineering sp
 
 ### Pre-Execution
 
-1. Load `.product/domain.md`, `.product/press.md`, `.product/faq.md`, and `.product/requirements.md` when present.
+1. Load `.product/domain.md`, `.product/press.md`, `.product/faq.md`, `.product/narrative.md`, `.product/roadmap.md`, and `.product/current-truth.md` when present.
 2. Discover all `spec.md` files under `.specify/`.
-3. Use `.product/templates/requirements-template.md` if `requirements.md` does not yet exist.
+3. Use `.product/templates/current-truth-template.md` if `current-truth.md` does not yet exist.
 
 ### Execution Flow
 
 1. Compare press release promises against the actual engineering specs.
-2. Update FAQs and requirements to reflect reality.
-3. Preserve historical product narrative and produce an alignment report.
+2. Update product-facing docs where needed, but treat `current-truth.md` as the canonical maintained statement of what is actually true in the product today.
+3. Keep `roadmap.md` forward-looking and avoid letting roadmap intent overwrite current truth.
+4. Preserve historical product narrative through companion history documents and produce an alignment report with grounded claims, drift, and missed opportunities.

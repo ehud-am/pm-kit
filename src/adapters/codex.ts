@@ -11,7 +11,7 @@ async function describeHealthIssues(context: AdapterHealthContext): Promise<Heal
       issues.push({
         code: "CODEX_MISSING_FILE",
         severity: "error",
-        message: `Missing Codex asset ${asset.targetPath}`,
+        message: `Missing Codex workflow asset ${asset.targetPath}`,
         path: asset.targetPath
       });
     }

@@ -1,6 +1,7 @@
 # Domain Knowledge: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
+**Companion History**: [.product/history/domain-history.md](.product/history/domain-history.md)
 
 ## Industry Context
 
@@ -47,6 +48,25 @@
 - [How success is measured in this domain — e.g., adoption rate, time-to-value, retention]
 - [Industry benchmarks or standards to aim for]
 
+## Assumptions
+
+- [Assumption about the market, buyer, or environment that currently informs product choices]
+- [Assumption that should be revisited if customer behavior or competitive conditions change]
+
+## Key Decisions
+
+| Decision | Why It Matters | Current Direction |
+|----------|----------------|-------------------|
+| [Decision] | [Why it shapes product thinking] | [What is currently true] |
+
+## Related Artifacts
+
+- [Press Release](../press.md)
+- [FAQ](../faq.md)
+- [Narrative](../narrative.md)
+- [Roadmap](../roadmap.md)
+- [Current Truth](../current-truth.md)
+
 ## Open Questions
 
-- [Unresolved domain questions that may affect product direction]
+- [Unresolved domain question that may affect future product direction]

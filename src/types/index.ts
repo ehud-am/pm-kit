@@ -1,6 +1,6 @@
 export type AssistantTarget = "claude" | "codex";
 export type RequestedTarget = AssistantTarget | "both";
-export type AssetCategory = "assistant-command" | "product-template";
+export type AssetCategory = "assistant-command" | "product-template" | "product-history-template";
 export type HealthStatus = "healthy" | "missing" | "partial" | "unhealthy";
 export type LastOperation = "add" | "remove" | "check" | "doctor";
 

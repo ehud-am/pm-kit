@@ -8,12 +8,31 @@ export interface AssetDefinition {
   targetPath: string;
 }
 
-const assistantCommands = ["product-spec-domain.md", "product-spec-press.md", "product-spec-faq.md", "product-spec-align.md"];
+const assistantCommands = [
+  "product-spec-domain.md",
+  "product-spec-press.md",
+  "product-spec-faq.md",
+  "product-spec-narrative.md",
+  "product-spec-roadmap.md",
+  "product-spec-align.md"
+];
+
 const sharedTemplates = [
   "domain-template.md",
   "press-template.md",
   "faq-template.md",
-  "requirements-template.md"
+  "narrative-template.md",
+  "roadmap-template.md",
+  "current-truth-template.md"
+];
+
+const historyTemplates = [
+  "domain-history-template.md",
+  "press-history-template.md",
+  "faq-history-template.md",
+  "narrative-history-template.md",
+  "roadmap-history-template.md",
+  "current-truth-history-template.md"
 ];
 
 function buildAssistantAssets(target: AssistantTarget, commandDir: string): AssetDefinition[] {
@@ -27,13 +46,29 @@ function buildAssistantAssets(target: AssistantTarget, commandDir: string): Asse
 }
 
 function buildSharedAssets(): AssetDefinition[] {
-  return sharedTemplates.map((fileName) => ({
+  const primaryAssets = sharedTemplates.map((fileName) => buildSharedAsset(fileName, "product-template"));
+  const historyAssets = historyTemplates.map((fileName) =>
+    buildSharedAsset(fileName, "product-history-template", "history")
+  );
+
+  return [...primaryAssets, ...historyAssets];
+}
+
+function buildSharedAsset(
+  fileName: string,
+  category: AssetCategory,
+  subdir?: string
+): AssetDefinition {
+  const relativeDir = subdir ? `assets/product/templates/${subdir}` : "assets/product/templates";
+  const targetDir = subdir ? `.product/templates/${subdir}` : ".product/templates";
+
+  return {
     id: `shared/${fileName.replace(/\.md$/, "")}`,
-    category: "product-template",
+    category,
     target: "shared",
-    sourcePath: `assets/product/templates/${fileName}`,
-    targetPath: `.product/templates/${fileName}`
-  }));
+    sourcePath: `${relativeDir}/${fileName}`,
+    targetPath: `${targetDir}/${fileName}`
+  };
 }
 
 export const assistantAssetRegistry: Record<AssistantTarget, AssetDefinition[]> = {

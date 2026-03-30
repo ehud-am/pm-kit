@@ -4,12 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-03-30
+
+### Added
+
+- New `/product-spec-narrative` and `/product-spec-roadmap` assistant commands for both Claude Code and Codex
+- New `.product` templates for `narrative`, `roadmap`, and `current-truth`
+- Companion history templates under `.product/history/` for the FRFAQ document set
+
 ### Changed
 
-- Prepared the `v0.3.0` release to validate a clean GitHub Actions release cycle end to end
-- Renamed the published package, CLI, assistant command prefix, and managed manifest path to `product-spec`
-- Updated current-facing documentation, CLI help text, and packaged assistant assets to use `product-spec`
-- Updated current-facing repository guidance to use the `product-spec` name consistently
+- Expanded the canonical workflow to `domain -> press -> faq -> narrative -> roadmap -> speckit* -> align -> current-truth`
+- Replaced the live `requirements` concept with `current-truth.md` as the maintained current-state product specification
+- Redesigned the existing FRFAQ templates around a shared decision-oriented structure with companion history documents
+- Updated install, health-check, and doctor guidance to reflect the expanded workflow and asset bundle
 
 ## [0.2.0] - 2026-03-29
 

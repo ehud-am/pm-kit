@@ -14,7 +14,7 @@ export const MANIFEST_RELATIVE_PATH = ".product-spec/manifest.json";
 
 const assetRecordSchema = z.object({
   id: z.string(),
-  category: z.enum(["assistant-command", "product-template"]),
+  category: z.enum(["assistant-command", "product-template", "product-history-template"]),
   sourcePath: z.string(),
   targetPath: z.string(),
   target: z.enum(["claude", "codex", "shared"]),

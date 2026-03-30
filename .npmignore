@@ -5,7 +5,9 @@ specs/
 .github/
 .agents/
 .claude/
+.Codex/
 .product/
+.product-spec/
 CLAUDE.md
 AGENTS.md
 install.sh

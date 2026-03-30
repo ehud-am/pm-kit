@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { AssetRecord, ManagedManifest, OperationFileResult } from "../../types/index.js";
 import { sharedAssetRegistry } from "../assets/registry.js";
 import {
@@ -29,7 +30,7 @@ export async function installSharedAssets(
     assertInsideRoot(rootDir, targetPath);
 
     const existed = await pathExists(targetPath);
-    await ensureDirectory(joinProjectPath(rootDir, ".product/templates"));
+    await ensureDirectory(path.dirname(targetPath));
     await writeText(targetPath, await readText(sourcePath));
 
     sharedAssets.push({

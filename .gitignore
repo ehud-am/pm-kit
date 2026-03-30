@@ -32,7 +32,9 @@ pnpm-debug.log*
 # Local agent/workspace state
 .agents/
 .claude/
+.Codex/
 
 # Generated local product/output state
 .product/
+.product-spec/
 .pmkit/

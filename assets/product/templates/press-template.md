@@ -1,10 +1,12 @@
 # Press Releases: [PROJECT_NAME]
 
-<!--
-  This document contains all press releases for this project, ordered reverse-chronologically.
--->
+**Last Updated**: [DATE]
+**Companion History**: [.product/history/press-history.md](.product/history/press-history.md)
 
----
+<!--
+  Keep the main document focused on the active upcoming or current press release.
+  Use the companion history file for deeper archival notes and superseded drafts.
+-->
 
 ## [RELEASE_NAME] — [TARGET_DATE] *(upcoming)*
 
@@ -24,3 +26,22 @@
 - **[Benefit 1]**: [One sentence explaining the customer value]
 - **[Benefit 2]**: [One sentence explaining the customer value]
 - **[Benefit 3]**: [One sentence explaining the customer value]
+
+## Assumptions
+
+- [Assumption about customer need, urgency, or launch context]
+- [Assumption that should be revisited during FAQ or alignment]
+
+## Key Decisions
+
+| Decision | Why It Matters | Current Direction |
+|----------|----------------|-------------------|
+| [Decision] | [Why it shapes the press release promise] | [Current choice] |
+
+## Related Artifacts
+
+- [Domain](../domain.md)
+- [FAQ](../faq.md)
+- [Narrative](../narrative.md)
+- [Roadmap](../roadmap.md)
+- [Current Truth](../current-truth.md)

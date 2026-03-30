@@ -11,7 +11,7 @@ async function describeHealthIssues(context: AdapterHealthContext): Promise<Heal
       issues.push({
         code: "CLAUDE_MISSING_FILE",
         severity: "error",
-        message: `Missing Claude Code asset ${asset.targetPath}`,
+        message: `Missing Claude Code workflow asset ${asset.targetPath}`,
         path: asset.targetPath
       });
     }

@@ -94,7 +94,7 @@ export async function runCheck(options: CheckOptions): Promise<CheckResult> {
         ? "No action needed."
         : status === "missing"
           ? `Run \`product-spec add ${target}\` to install this integration.`
-          : `Run \`product-spec add ${target}\` to refresh managed files, then \`product-spec check ${target}\` again.`;
+          : `Run \`product-spec add ${target}\` to refresh managed files, then \`product-spec check ${target}\` again. The canonical workflow ends with \`current-truth.md\` maintained by \`align\`.`;
 
     reports.push({
       target,

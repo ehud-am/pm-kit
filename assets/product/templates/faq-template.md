@@ -1,8 +1,7 @@
 # Frequently Asked Questions: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
-
----
+**Companion History**: [.product/history/faq-history.md](.product/history/faq-history.md)
 
 ## [RELEASE_NAME] — [TARGET_DATE] *(upcoming)*
 
@@ -36,3 +35,22 @@ A: [Identify dependencies, risks, and mitigation strategies.]
 
 **Q: [Question about timeline or resources]**
 A: [Honest assessment of what it takes to deliver.]
+
+## Assumptions
+
+- [Assumption about customer expectations or stakeholder constraints]
+- [Assumption worth validating during roadmap or specification work]
+
+## Key Decisions
+
+| Decision | Why It Matters | Current Direction |
+|----------|----------------|-------------------|
+| [Decision] | [Why it shapes the answers you are willing to stand behind] | [Current answer] |
+
+## Related Artifacts
+
+- [Domain](../domain.md)
+- [Press Release](../press.md)
+- [Narrative](../narrative.md)
+- [Roadmap](../roadmap.md)
+- [Current Truth](../current-truth.md)

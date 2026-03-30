@@ -39,6 +39,13 @@ describe("product-spec CLI", () => {
     expect(manifest.targets).toHaveLength(2);
     expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-domain.md"), "utf8")).toContain("/product-spec-domain");
     expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).toContain(".product/domain.md");
+    expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-narrative.md"), "utf8")).toContain(".product/narrative.md");
+    expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-roadmap.md"), "utf8")).toContain(".product/roadmap.md");
+    expect(await readFile(path.join(projectDir, ".product/templates/current-truth-template.md"), "utf8")).toContain("# Current Truth:");
+    expect(
+      await readFile(path.join(projectDir, ".product/templates/history/current-truth-history-template.md"), "utf8")
+    ).toContain("# Current Truth History:");
+    expect(result.stdout).toContain("current-truth");
   });
 
   it("removes only product-spec-managed files and keeps unrelated files", async () => {
@@ -59,14 +66,36 @@ describe("product-spec CLI", () => {
     const projectDir = await makeProjectDir("product-spec-check-");
 
     expect(runCli(projectDir, "add", "claude").status).toBe(0);
-    await rm(path.join(projectDir, ".claude/commands/product-spec-domain.md"));
+    await rm(path.join(projectDir, ".product/templates/current-truth-template.md"));
 
     const check = runCli(projectDir, "check", "claude");
     const doctor = runCli(projectDir, "doctor", "claude");
 
     expect(check.status).toBe(0);
-    expect(check.stdout).toContain("claude: partial");
-    expect(doctor.stdout).toContain("Recommended action");
+    expect(check.stdout).toContain("claude: unhealthy");
+    expect(check.stdout).toContain("Shared template is missing: .product/templates/current-truth-template.md");
+    expect(doctor.stdout).toContain("current-truth");
+    expect(doctor.stdout).toContain("Workflow reminder");
+  });
+
+  it("installs the expanded FRFAQ workflow assets for one target", async () => {
+    const projectDir = await makeProjectDir("product-spec-workflow-");
+
+    const result = runCli(projectDir, "add", "claude");
+
+    expect(result.status).toBe(0);
+    await expect(readFile(path.join(projectDir, ".claude/commands/product-spec-narrative.md"), "utf8")).resolves.toContain(
+      "/product-spec-roadmap"
+    );
+    await expect(readFile(path.join(projectDir, ".claude/commands/product-spec-align.md"), "utf8")).resolves.toContain(
+      "current-truth.md"
+    );
+    await expect(readFile(path.join(projectDir, ".product/templates/roadmap-template.md"), "utf8")).resolves.toContain(
+      "## Committed Bets"
+    );
+    await expect(readFile(path.join(projectDir, ".product/templates/narrative-template.md"), "utf8")).resolves.toContain(
+      "## Product Promise"
+    );
   });
 
   it("shows product-spec in the help output", async () => {

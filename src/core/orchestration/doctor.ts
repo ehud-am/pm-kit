@@ -23,7 +23,8 @@ export async function runDoctor(options: DoctorOptions): Promise<DoctorResult> {
       `Status: ${report.status}`,
       `Manifest aligned: ${report.manifestAligned ? "yes" : "no"}`,
       issueList,
-      `Recommended action: ${report.recommendedAction}`
+      `Recommended action: ${report.recommendedAction}`,
+      "Workflow reminder: domain -> press -> faq -> narrative -> roadmap -> speckit* -> align -> current-truth"
     ].join("\n");
   });
 

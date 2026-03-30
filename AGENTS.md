@@ -1,6 +1,6 @@
 # product-spec Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-03-29
+Auto-generated from all feature plans. Last updated: 2026-03-30
 
 ## Active Technologies
 - TypeScript 5.x on Node.js 22 LTS + `commander` for CLI parsing, `zod` for config/state validation, `vitest` for test execution, `tsx` for local development, `typescript` for build/type-check (003-prime-time-cli)
@@ -8,6 +8,8 @@ Auto-generated from all feature plans. Last updated: 2026-03-29
 - Markdown command and template assets packaged under `assets/` (003-prime-time-cli)
 - TypeScript 5.x on Node.js 22 LTS, plus Markdown/YAML repository assets + `commander` for CLI parsing, `zod` for manifest validation, `vitest` for unit and integration testing, npm package metadata and scripts for distribution (004-rename-product-spec-package)
 - File system only; project-local managed state in `.product-spec/manifest.json`; packaged assets in `assets/`; release and product guidance in Markdown docs (004-rename-product-spec-package)
+- TypeScript 5.x on Node.js 22 LTS + `commander`, `zod`, Node.js standard library (005-frfaq-narrative-roadmap)
+- File system only; packaged assets under `assets/`, installed state in `.product-spec/manifest.json`, managed project assets under assistant command directories and `.product/templates/` (005-frfaq-narrative-roadmap)
 
 ## Project Structure
 
@@ -34,6 +36,7 @@ specs/                   # Feature specs (spec-kit output)
 - No trailing whitespace; single blank line between sections
 
 ## Recent Changes
+- 005-frfaq-narrative-roadmap: Added TypeScript 5.x on Node.js 22 LTS + `commander`, `zod`, Node.js standard library
 - 004-rename-product-spec-package: Added TypeScript 5.x on Node.js 22 LTS, plus Markdown/YAML repository assets + `commander` for CLI parsing, `zod` for manifest validation, `vitest` for unit and integration testing, npm package metadata and scripts for distribution
 - 003-prime-time-cli: Added TypeScript 5.x on Node.js 22 LTS + `commander` for CLI parsing, `zod` for config/state validation, `vitest` for test execution, `tsx` for local development, `typescript` for build/type-check
 

@@ -5,9 +5,9 @@
 [![node release](https://img.shields.io/node/v/product-spec)](https://www.npmjs.com/package/product-spec)
 [![License](https://img.shields.io/npm/l/product-spec)](./LICENSE)
 
-The product management counterpart to [spec-kit](https://github.com/github/spec-kit). product-spec brings product management disciplines to spec-driven development, following Amazon's Working Backwards (PR/FAQ) methodology.
+The product management counterpart to [spec-kit](https://github.com/github/spec-kit). product-spec brings product management disciplines to spec-driven development, following Amazon's Working Backwards methodology from domain context through current product truth.
 
-While spec-kit handles engineering specifications, product-spec handles the product narrative: the domain context, press releases, FAQs, and requirements that define what you're building and why before spec-kit defines how.
+While spec-kit handles engineering specifications, product-spec handles the product narrative: domain context, press releases, FAQs, durable narrative, roadmap, and current truth that define what you're building, why it matters, and what is actually true once engineering work is aligned.
 
 ## Installation
 
@@ -79,50 +79,57 @@ After adding an integration, use the installed slash commands inside the assista
 ```text
 /product-spec-domain ...
 /product-spec-press ...
+/product-spec-narrative ...
+/product-spec-roadmap ...
 /product-spec-faq
 /product-spec-align
 ```
 
 | Target | Command directory | Slash commands |
 |--------|-------------------|----------------|
-| Claude Code | `.claude/commands/` | `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-align` |
-| Codex | `.Codex/commands/` | `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-align` |
+| Claude Code | `.claude/commands/` | `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-narrative`, `/product-spec-roadmap`, `/product-spec-align` |
+| Codex | `.Codex/commands/` | `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-narrative`, `/product-spec-roadmap`, `/product-spec-align` |
 
 ## How It Works
 
-product-spec creates a `.product/` folder in your project that maintains a living, cumulative view of the product across releases. Each document grows over time, telling the full story of the project from its first release to the one currently under development.
+product-spec creates a `.product/` folder in your project that maintains a living view of the product across releases. Primary documents stay focused on the current state of thinking, while companion history documents preserve notable changes over time.
 
 ### Documents
 
 | File | Purpose |
 |------|---------|
 | `.product/domain.md` | Industry context, target users, terminology, competitive landscape |
-| `.product/press.md` | Press releases for every release, upcoming first and historical below |
-| `.product/faq.md` | External and internal FAQs for every release, upcoming first and historical below |
-| `.product/requirements.md` | Release-independent, complete view of all product use cases and capabilities |
+| `.product/press.md` | Current press release and customer-facing promise |
+| `.product/faq.md` | Current external and internal FAQs that challenge the promise |
+| `.product/narrative.md` | Durable internal story: customer, tension, future state, and principles |
+| `.product/roadmap.md` | Forward-looking sequencing of bets, phases, and dependencies |
+| `.product/current-truth.md` | Maintained current-state product specification grounded by alignment |
+| `.product/history/*.md` | Companion history files for key product artifacts |
 
 ### Workflow
 
 ```text
-/product-spec-domain  -->  /product-spec-press  -->  /product-spec-faq  -->  /speckit.specify  -->  /product-spec-align
-    (context)       (promise)         (challenge)       (engineer)             (reconcile)
+/product-spec-domain  -->  /product-spec-press  -->  /product-spec-faq  -->  /product-spec-narrative  -->  /product-spec-roadmap  -->  /speckit.specify  -->  /product-spec-align
+    (context)       (promise)         (challenge)              (story)                    (bets)                 (engineer)             (reconcile)
 ```
 
 1. `/product-spec-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
 2. `/product-spec-press` writes a press release as if the next release has already shipped.
 3. `/product-spec-faq` challenges the press release with hard questions from customers and stakeholders.
-4. `/speckit.specify` hands off to spec-kit for engineering specifications.
-5. `/product-spec-align` reconciles product docs with the final engineering scope.
+4. `/product-spec-narrative` turns the promise and challenge into a durable internal product story.
+5. `/product-spec-roadmap` sequences future bets and dependencies without replacing current truth.
+6. `/speckit.specify` hands off the next bet to spec-kit for engineering specifications.
+7. `/product-spec-align` reconciles product docs with the evolving engineering scope and maintains `.product/current-truth.md`.
 
 ## Key Concepts
 
-### Cumulative Documents
+### Current Truth
 
-Unlike traditional release notes, product-spec documents are cumulative. The press release file contains all press releases ever written for the project, with the upcoming release at the top and historical releases below. The same applies to FAQs.
+`current-truth.md` is the maintained answer to "what is actually true in the product today?" It is updated by alignment work and should stay distinct from the future-facing roadmap.
 
-### `requirements.md` as the Product Spec
+### Companion History
 
-While `press.md` and `faq.md` are organized by release, `requirements.md` is organized by functional area. It is the release-independent, always-current answer to "what does this product do?"
+Primary product docs stay focused on the current state. Companion files under `.product/history/` preserve important prior decisions, revisions, and reasoning.
 
 ### Working Backwards
 
