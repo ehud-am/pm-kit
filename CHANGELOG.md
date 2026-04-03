@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-04-02
+
+### Fixed
+
+- Ignored generated `product/` output in git and npm ignore rules to prevent accidental check-ins
+- Removed legacy tracked `/.product/` template files from the repository now that `product/` is the canonical generated docs location
+- Kept the published npm tarball focused on runtime assets and release artifacts only
+
 ## [0.4.1] - 2026-03-30
 
 ### Fixed

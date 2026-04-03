@@ -6,6 +6,7 @@ specs/
 .agents/
 .claude/
 .Codex/
+product/
 .product/
 .product-spec/
 CLAUDE.md
