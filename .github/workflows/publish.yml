@@ -9,10 +9,9 @@ jobs:
     if: github.event.release.prerelease == false
     runs-on: ubuntu-latest
     environment: release
-    env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     permissions:
       contents: read
+      # npm trusted publishing exchanges the job OIDC identity for a short-lived publish credential.
       id-token: write
 
     steps:
@@ -24,16 +23,14 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org
-          always-auth: true
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Configure npm authentication
+      - name: Ensure npm supports trusted publishing
         run: |
-          printf '%s\n' \
-            'registry=https://registry.npmjs.org/' \
-            'always-auth=true' \
-            '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}' > "$HOME/.npmrc"
+          # npm trusted publishing requires npm 11.5.1+.
+          npm install --global npm@^11.5.1
+          npm --version
 
       - name: Resolve release version
         id: version
@@ -65,4 +62,5 @@ jobs:
         run: npm pack --dry-run
 
       - name: Publish package to npm
-        run: npm publish --provenance --access public
+        # Trusted publishing uses the GitHub OIDC identity from this job; no NODE_AUTH_TOKEN is required here.
+        run: npm publish --access public

@@ -16,6 +16,7 @@ export interface AssetDefinition {
 }
 
 const assistantCommands = [
+  "product-spec-help.md",
   "product-spec-domain.md",
   "product-spec-press.md",
   "product-spec-faq.md",

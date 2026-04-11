@@ -1,6 +1,6 @@
 # product-spec Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-03
+Auto-generated from all feature plans. Last updated: 2026-04-11
 
 ## Active Technologies
 - TypeScript 5.x on Node.js 22 LTS + `commander` for CLI parsing, `zod` for config/state validation, `vitest` for test execution, `tsx` for local development, `typescript` for build/type-check (003-prime-time-cli)
@@ -11,6 +11,8 @@ Auto-generated from all feature plans. Last updated: 2026-04-03
 - TypeScript 5.x on Node.js 22 LTS + `commander`, `zod`, Node.js standard library (005-frfaq-narrative-roadmap)
 - File system only; packaged assets under `assets/`, installed state in `.product-spec/manifest.json`, managed project assets under assistant command directories and `.product/templates/` (005-frfaq-narrative-roadmap)
 - File system only; packaged assets under `assets/`, installed state in `.product-spec/manifest.json`, managed project assets under assistant command directories and `docs/product/templates/` in user projects (006-relocate-product-docs)
+- TypeScript 5.x on Node.js 22 LTS, plus Markdown command assets + `commander`, `zod`, Node.js standard library (007-product-help-command)
+- File system only; packaged command assets under `assets/`, installed state in `.product-spec/manifest.json`, and user-project product artifacts under `docs/product/` when those workflow steps are used (007-product-help-command)
 
 ## Project Structure
 
@@ -37,9 +39,9 @@ specs/                   # Feature specs (spec-kit output)
 - No trailing whitespace; single blank line between sections
 
 ## Recent Changes
+- 007-product-help-command: Added TypeScript 5.x on Node.js 22 LTS, plus Markdown command assets + `commander`, `zod`, Node.js standard library
 - 006-relocate-product-docs: Added TypeScript 5.x on Node.js 22 LTS + `commander`, `zod`, Node.js standard library
 - 005-frfaq-narrative-roadmap: Added TypeScript 5.x on Node.js 22 LTS + `commander`, `zod`, Node.js standard library
-- 004-rename-product-spec-package: Added TypeScript 5.x on Node.js 22 LTS, plus Markdown/YAML repository assets + `commander` for CLI parsing, `zod` for manifest validation, `vitest` for unit and integration testing, npm package metadata and scripts for distribution
 
 <!-- MANUAL ADDITIONS START -->
 - Canonical installed product-doc output now lives under `docs/product/`; treat `product/` and `.product/` as legacy migration sources only.

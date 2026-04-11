@@ -77,6 +77,7 @@ product-spec help
 After adding an integration, use the installed slash commands inside the assistant:
 
 ```text
+/product-spec-help [optional question]
 /product-spec-domain ...
 /product-spec-press ...
 /product-spec-narrative ...
@@ -87,12 +88,14 @@ After adding an integration, use the installed slash commands inside the assista
 
 | Target | Command directory | Slash commands |
 |--------|-------------------|----------------|
-| Claude Code | `.claude/commands/` | `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-narrative`, `/product-spec-roadmap`, `/product-spec-align` |
-| Codex | `.Codex/commands/` | `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-narrative`, `/product-spec-roadmap`, `/product-spec-align` |
+| Claude Code | `.claude/commands/` | `/product-spec-help`, `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-narrative`, `/product-spec-roadmap`, `/product-spec-align` |
+| Codex | `.Codex/commands/` | `/product-spec-help`, `/product-spec-domain`, `/product-spec-press`, `/product-spec-faq`, `/product-spec-narrative`, `/product-spec-roadmap`, `/product-spec-align` |
 
 ## How It Works
 
 product-spec creates a `docs/product/` folder in your project that maintains a living view of the product across releases. Primary documents stay focused on the current state of thinking, while companion history documents preserve notable changes over time. Existing projects that still use `product/` or `.product/` are migrated toward `docs/product/` during normal `product-spec add` refreshes when the move is safe.
+
+Use `/product-spec-help` anytime when you want an overview or a focused explanation of one artifact. It explains the workflow but is not itself a workflow step.
 
 ### Documents
 
@@ -109,8 +112,16 @@ product-spec creates a `docs/product/` folder in your project that maintains a l
 ### Workflow
 
 ```text
-/product-spec-domain  -->  /product-spec-press  -->  /product-spec-faq  -->  /product-spec-narrative  -->  /product-spec-roadmap  -->  /speckit.specify  -->  /product-spec-align
-    (context)       (promise)         (challenge)              (story)                    (bets)                 (engineer)             (reconcile)
+/product-spec-domain  -->  /product-spec-press  -->  /product-spec-faq  -->  /product-spec-narrative  -->  /product-spec-roadmap
+    (context)       (promise)         (challenge)              (story)                    (bets)
+                                                                                                   |
+                                                                                                   v
+                                                                                    /speckit.specify  -->  /speckit.clarify  -->  /speckit.plan  -->  /speckit.tasks  -->  /speckit.implement
+                                                                                         (scope)              (refine)              (design)             (break down)             (build)
+                                                                                                   |
+                                                                                                   v
+                                                                                           /product-spec-align  -->  docs/product/current-truth.md
+                                                                                                 (reconcile)                (current state)
 ```
 
 1. `/product-spec-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
@@ -118,8 +129,9 @@ product-spec creates a `docs/product/` folder in your project that maintains a l
 3. `/product-spec-faq` challenges the press release with hard questions from customers and stakeholders.
 4. `/product-spec-narrative` turns the promise and challenge into a durable internal product story.
 5. `/product-spec-roadmap` sequences future bets and dependencies without replacing current truth.
-6. `/speckit.specify` hands off the next bet to spec-kit for engineering specifications.
-7. `/product-spec-align` reconciles product docs with the evolving engineering scope and maintains `docs/product/current-truth.md`.
+6. `/speckit.specify` creates the engineering feature specification for the next bet.
+7. `/speckit.clarify`, `/speckit.plan`, `/speckit.tasks`, and `/speckit.implement` refine that bet into an execution-ready plan and working implementation.
+8. `/product-spec-align` reconciles product docs with the evolving engineering scope and maintains `docs/product/current-truth.md`.
 
 ## Key Concepts
 
@@ -144,6 +156,11 @@ GitHub Actions now handles:
 - CI validation on pushes and pull requests
 - packaging tagged releases
 - publishing the npm package when a `v*` tag is pushed
+- publishing through npm trusted publishing from GitHub Actions instead of a long-lived PAT/token secret
+
+The publish workflow now uses npm trusted publishing from GitHub Actions via OIDC instead of a long-lived `NPM_TOKEN` or PAT-style publish credential. The workflow upgrades npm in CI to a version that supports trusted publishing, requests `id-token: write`, and publishes with `npm publish` without writing token credentials into `.npmrc`.
+
+For public releases published through trusted publishing, npm automatically generates provenance attestations. The npm package must have a trusted publisher configured for this repository and `.github/workflows/publish.yml` before release publishing will succeed.
 
 ## Rename Notes
 
@@ -153,7 +170,7 @@ GitHub Actions now handles:
 
 - Node.js and npm
 - [Claude Code](https://claude.ai/code) and/or Codex for assistant integration targets
-- [spec-kit](https://github.com/github/spec-kit) for the `/speckit.specify` portion of the workflow
+- [spec-kit](https://github.com/github/spec-kit) for the `/speckit.specify` through `/speckit.implement` portion of the workflow
 
 ## Changelog
 

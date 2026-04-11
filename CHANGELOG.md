@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-04-11
+
+### Added
+
+- New `/product-spec-help` assistant command for both Claude Code and Codex, with overview mode for the full workflow and focused question mode for artifact- or handoff-specific explanations
+
+### Changed
+
+- README command listings and workflow guidance now document `/product-spec-help` and the fuller spec-kit handoff chain from `/speckit.specify` through `/speckit.implement`
+- The npm publish workflow now uses GitHub Actions OIDC trusted publishing instead of a long-lived npm publish PAT/token, and the release docs now call out the trusted publisher requirement
+
+### Fixed
+
+- Managed asset verification now treats a missing installed `product-spec-help` command like any other drifted assistant asset
+- npm package ignore rules now also exclude `build/` output and `.env.*` files from release artifacts
+
 ## [0.5.0] - 2026-04-03
 
 ### Changed

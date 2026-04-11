@@ -16,8 +16,10 @@ install.sh
 vitest.config.ts
 tsconfig.json
 node_modules/
+build/
 coverage/
 *.log
 *.tgz
 .DS_Store
 .env
+.env.*

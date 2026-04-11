@@ -38,7 +38,9 @@ describe("product-spec CLI", () => {
     const manifest = JSON.parse(await readFile(path.join(projectDir, ".product-spec/manifest.json"), "utf8"));
     expect(manifest.targets).toHaveLength(2);
     expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-domain.md"), "utf8")).toContain("/product-spec-domain");
+    expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-help.md"), "utf8")).toContain("/product-spec-help");
     expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).toContain("docs/product/domain.md");
+    expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-help.md"), "utf8")).toContain("spec.md");
     expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-narrative.md"), "utf8")).toContain(
       "docs/product/narrative.md"
     );
@@ -69,8 +71,12 @@ describe("product-spec CLI", () => {
     expect(result.status).toBe(0);
     expect(result.stdout).toContain("Changed targets: claude");
     await expect(readFile(path.join(projectDir, ".claude/commands/manual.md"), "utf8")).resolves.toBe("manual");
+    await expect(readFile(path.join(projectDir, ".claude/commands/product-spec-help.md"), "utf8")).rejects.toBeTruthy();
     await expect(readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).resolves.toContain(
       "docs/product/domain.md"
+    );
+    await expect(readFile(path.join(projectDir, ".Codex/commands/product-spec-help.md"), "utf8")).resolves.toContain(
+      "/product-spec-help"
     );
   });
 
@@ -108,6 +114,37 @@ describe("product-spec CLI", () => {
     await expect(readFile(path.join(projectDir, "docs", "product", "templates", "narrative-template.md"), "utf8")).resolves.toContain(
       "## Product Promise"
     );
+  });
+
+  it("packages focused help guidance for workflow questions", async () => {
+    const projectDir = await makeProjectDir("product-spec-help-guidance-");
+
+    expect(runCli(projectDir, "add", "both").status).toBe(0);
+
+    await expect(readFile(path.join(projectDir, ".claude/commands/product-spec-help.md"), "utf8")).resolves.toContain(
+      "what is domain.md and why is it needed?"
+    );
+    await expect(readFile(path.join(projectDir, ".Codex/commands/product-spec-help.md"), "utf8")).resolves.toContain(
+      "what comes after roadmap?"
+    );
+  });
+
+  it("documents the help command and reports when its managed asset is missing", async () => {
+    const readme = await readFile(path.resolve("README.md"), "utf8");
+    expect(readme).toContain("/product-spec-help");
+    expect(readme).toContain("explains the workflow but is not itself a workflow step");
+
+    const projectDir = await makeProjectDir("product-spec-help-health-");
+
+    expect(runCli(projectDir, "add", "claude").status).toBe(0);
+    await rm(path.join(projectDir, ".claude/commands/product-spec-help.md"));
+
+    const check = runCli(projectDir, "check", "claude");
+    const doctor = runCli(projectDir, "doctor", "claude");
+
+    expect(check.status).toBe(0);
+    expect(check.stdout).toContain("Expected managed asset is missing: .claude/commands/product-spec-help.md");
+    expect(doctor.stdout).toContain(".claude/commands/product-spec-help.md");
   });
 
   it("migrates an existing /product directory to /docs/product on add", async () => {
